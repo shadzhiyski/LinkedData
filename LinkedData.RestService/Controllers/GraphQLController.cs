@@ -1,0 +1,56 @@
+using System;
+using System.Threading.Tasks;
+using GraphQL;
+using GraphQL.Utilities;
+using LinkedData.RestService.Models;
+using LinkedData.RestService.Models.GraphQL;
+using Microsoft.AspNetCore.Mvc;
+
+namespace LinkedData.RestService.Controllers
+{
+    [Route("[controller]")]
+    public class GraphQLController : Controller
+    {
+        private readonly LinkedDataSchema _schema;
+        private readonly IDocumentExecuter _documentExecuter;
+
+        public GraphQLController(LinkedDataSchema schema, IDocumentExecuter documentExecuter) 
+        { 
+            _schema = schema;
+            _documentExecuter = documentExecuter;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var printedSchema = new SchemaPrinter(_schema).Print();
+            return Ok(printedSchema);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            var inputs = query.Variables.ToInputs();
+            var executionOptions = new ExecutionOptions
+            {
+                Schema = _schema,
+                Query = query.Query,
+                Inputs = inputs
+            };
+
+            var result = await _documentExecuter.ExecuteAsync(executionOptions).ConfigureAwait(false);
+
+            if (result.Errors?.Count > 0)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result.Data);
+        }
+    }
+}
