@@ -8,21 +8,7 @@ namespace LinkedData.Data.External
 {
     public class EnsemblDataService : BaseDataService
     {
-        protected static readonly EnsemblDataService _instance;
-        public static EnsemblDataService Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
-
-        static EnsemblDataService() 
-        {
-            _instance = new EnsemblDataService();
-        }
-
-        protected EnsemblDataService()
+        public EnsemblDataService()
             :base("http://rest.ensembl.org")
         { }
         
@@ -40,6 +26,21 @@ namespace LinkedData.Data.External
             }
 
             return geneId;
+        }
+
+        public async Task<JArray> GetGeneVariationsAsync(string geneName) 
+        {
+            var path = string.Format("/phenotype/gene/homo_sapiens/{0}?include_associated=1;include_overlap=1", geneName);
+            HttpResponseMessage response = await client.GetAsync(path);
+            if (response.IsSuccessStatusCode)
+            {
+                var contentString =  await response.Content.ReadAsStringAsync();
+                JArray content = JArray.Parse(contentString);
+
+                return content;
+            }
+
+            return null;
         }
     }
 }

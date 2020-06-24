@@ -53,6 +53,8 @@ namespace LinkedData.RestService
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
 
             services.AddSingleton<Neo4jDataService>();
+            services.AddSingleton<EbiDataService>();
+            services.AddSingleton<EnsemblDataService>();
 
             services.AddSingleton<GenesRepository>();
             services.AddSingleton<ProteinsRepository>();

@@ -8,6 +8,8 @@ namespace LinkedData.RestService.Models.GraphQL
         public ProteinType()
         {
             Field(g => g.Name);
+
+            Field(g => g.FullName, nullable: true);
         }
     }
 }

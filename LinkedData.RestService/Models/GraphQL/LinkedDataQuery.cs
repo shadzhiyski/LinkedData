@@ -42,22 +42,6 @@ namespace LinkedData.RestService.Models.GraphQL
                         ? genesRepository.GetTree((Gene gene) => gene.Name == geneName)
                         : genesRepository.GetTree();
                 });
-
-            // Field<ListGraphType<ProteinType>>(
-            //     "proteins",
-            //     arguments: new QueryArguments(new QueryArgument[] 
-            //     {
-            //         new QueryArgument<StringGraphType> { Name = "geneName" }
-            //     }),
-            //     resolve: context =>
-            //     {
-            //         var geneName = context.GetArgument<string>("geneName");
-
-            //         return !string.IsNullOrEmpty(geneName)
-            //             ? proteinsRepository.GetAll((Gene gene) => gene.Name == geneName,
-            //                 new GeneProteinRelationship())
-            //             : proteinsRepository.GetAll();
-            //     });
             
             Field<ListGraphType<ProteinWithRelationsType>>(
                 "proteins",

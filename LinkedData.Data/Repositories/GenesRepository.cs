@@ -10,9 +10,19 @@ namespace LinkedData.Data.Repositories
 
     public class GenesRepository : BaseRepository<Gene>
     {
-        public GenesRepository(Neo4jDataService neo4jService)
+        public EbiDataService EbiDataService { get; }
+
+        public EnsemblDataService EnsemblDataService { get; }
+
+        public GenesRepository(
+            Neo4jDataService neo4jService,
+            EbiDataService ebiDataService,
+            EnsemblDataService ensemblDataService)
             :base("Gene", neo4jService)
-        { }
+        {
+            EbiDataService = ebiDataService;
+            EnsemblDataService = ensemblDataService;
+        }
 
         public IEnumerable<(string Gene, IEnumerable<Variation> Variations, IEnumerable<Protein> Proteins)> GetTree()
         {
@@ -51,26 +61,45 @@ namespace LinkedData.Data.Repositories
 
         public override void PutRelated(Gene item)
         {
-            var relatedData = EbiDataService.Instance.GetGeneRelatedData(item.Name);
-            
+            PutProteinsAndRelatedData(item.Name);
+
+            PutVariations(item.Name);
+        }
+
+        private void PutProteinsAndRelatedData(string geneName)
+        {
+            var gene = new Gene()
+            {
+                Name = geneName
+            };
+
+            var relatedData = EbiDataService.GetGeneRelatedData(geneName);
             foreach (var relatedItem in relatedData)
             {
+                if (relatedItem["id"] == null
+                    || relatedItem["accession"] == null
+                    || relatedItem["protein"] == null)
+                {
+                    continue;
+                }
+
                 var protein = new Protein()
                 { 
                     Name = relatedItem["id"].ToString(), 
                     Code = relatedItem["accession"].ToString(),
                     FullName = relatedItem["protein"]
-                        ?["submittedName"].FirstOrDefault()
+                        ?["submittedName"]?.FirstOrDefault()
                         ?["fullName"]
-                        ?["value"].ToString()
+                        ?["value"]
+                        ?.ToString()
+                        ?? string.Empty
                 };
 
-                var relatedGenes = relatedItem["gene"].Select(jt => 
-                    new Gene() 
-                    { 
-                        Name = jt["name"]["value"].ToString()
-                    }
-                );
+                _neo4jService.Client.Cypher.MergeEntity(gene)
+                    .MergeEntity(protein)
+                    .MergeRelationship(new GeneProteinRelationship())
+                    .ExecuteWithoutResults();
+                
                 var relatedSequences = new Sequence[]
                 { 
                     new Sequence() 
@@ -93,24 +122,10 @@ namespace LinkedData.Data.Repositories
                         }) : new Comment[] {}
                 ).SelectMany(c => c) : new Comment[] {};
 
-                foreach (var gene in relatedGenes)
-                {
-                    var t = _neo4jService.Client.Cypher.MergeEntity(gene)
-                        .MergeEntity(protein)
-                        .Merge("(gene)-[rel:protein]->(protein)")
-                        .MergeRelationship(new GeneProteinRelationship()).Query.DebugQueryText;
-                    _neo4jService.Client.Cypher.MergeEntity(gene)
-                        .MergeEntity(protein)
-                        //.Merge("(gene)-[rel:protein]->(protein)")
-                        .MergeRelationship(new GeneProteinRelationship())
-                        .ExecuteWithoutResults();
-                }
-
                 foreach (var sequence in relatedSequences)
                 {
                     _neo4jService.Client.Cypher.MergeEntity(protein)
                         .MergeEntity(sequence)
-                        //.Merge("(protein)-[rel:sequence]->(sequence)")
                         .MergeRelationship(new ProteinSequenceRelationship())
                         .ExecuteWithoutResults();
                 }
@@ -119,7 +134,6 @@ namespace LinkedData.Data.Repositories
                 {
                     _neo4jService.Client.Cypher.MergeEntity(protein)
                         .MergeEntity(taxon)
-                        //.Merge("(protein)-[rel:taxon]->(taxon)")
                         .MergeRelationship(new ProteinTaxonRelationship())
                         .ExecuteWithoutResults();
                 }
@@ -128,10 +142,32 @@ namespace LinkedData.Data.Repositories
                 {
                     _neo4jService.Client.Cypher.MergeEntity(protein)
                         .MergeEntity(comment)
-                        //.Merge("(protein)-[rel:comment]->(comment)")
                         .MergeRelationship(new ProteinCommentRelationship())
                         .ExecuteWithoutResults();
                 }
+            }
+        }
+
+        private async void PutVariations(string geneName)
+        {
+            var gene = new Gene()
+            {
+                Name = geneName
+            };
+
+            var variationsJsonArray = await EnsemblDataService.GetGeneVariationsAsync(geneName);
+            foreach (var variationJson in variationsJsonArray)
+            {
+                var variation = new Variation()
+                { 
+                    Location = variationJson["location"].ToString(),
+                    Description = variationJson["description"].ToString()
+                };
+
+                _neo4jService.Client.Cypher.MergeEntity(gene)
+                    .MergeEntity(variation)
+                    .MergeRelationship(new GeneVariationRelationship())
+                    .ExecuteWithoutResults();
             }
         }
     }

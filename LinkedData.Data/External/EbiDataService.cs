@@ -8,21 +8,7 @@ namespace LinkedData.Data.External
 {
     public class EbiDataService : BaseDataService
     {
-        protected static readonly EbiDataService _instance;
-        public static EbiDataService Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
-
-        static EbiDataService() 
-        {
-            _instance = new EbiDataService();
-        }
-
-        protected EbiDataService() 
+        public EbiDataService() 
             : base("https://www.ebi.ac.uk")
         {
             

@@ -11,9 +11,9 @@ namespace LinkedData.Data.External
     {
         public static readonly string ServerAddress = "bolt://localhost:7687";
 
-        private static readonly string User = "<username>";
+        private static readonly string User = "neo4j";
         
-        private static readonly string Password = "<password>";
+        private static readonly string Password = "neo4j123";
 
         public Neo4jDataService()
         {
@@ -80,19 +80,6 @@ namespace LinkedData.Data.External
                 .MergeOnMatch(sequence => sequence.Content)
                 .MergeOnMatchOrCreate(sequence => sequence.Content)
                 .Set();
-        }
-
-        public JArray GetGeneRelatedProteins(string geneName)
-        {
-            var client = new GraphClient(new Uri(ServerAddress),
-                "neo4j", Password);
-
-            client.Connect();
-
-            var result = client.Cypher.Match(string.Format("(g:Gene)-[rel:transcribes_to]->(p:Proteins)", geneName))
-                .Where((Gene g) => g.Name == geneName)
-                .Return<string>("(p)");
-            return JArray.FromObject(result.Results);
         }
 
         public void LinkGeneWithProteins(string geneName)

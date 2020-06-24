@@ -23,7 +23,7 @@ namespace LinkedData.Data.Models
         [CypherMergeOnMatch]
         public string Code { get; set; }
 
-        [JsonProperty("full_name")]
+        [JsonProperty("fullName")]
         [CypherMerge]
         [CypherMatch]
         [CypherMergeOnCreate]

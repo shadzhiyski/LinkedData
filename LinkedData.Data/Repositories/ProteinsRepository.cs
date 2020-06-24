@@ -14,34 +14,34 @@ namespace LinkedData.Data.Repositories
             : base("Protein", neo4jService)
         { }
 
-        public IEnumerable<KeyValuePair<Protein, IEnumerable<Comment>>> GetTree()
+        public IEnumerable<(Protein Protein, IEnumerable<Comment> Comments)> GetTree()
         {
             var client = _neo4jService.Client;
 
             var searchedItems = client.Cypher.MatchRelationship(new ProteinCommentRelationship())
-                .Return((protein, comment) => new 
-                { 
+                .Return((protein, comment) => new
+                {
                     Protein = protein.As<Protein>(), 
-                    Comments = comment.CollectAs<Comment>() 
+                    Comments = protein.CollectAsDistinct<Comment>()
                 })
-                .Results.Select(d => new KeyValuePair<Protein, IEnumerable<Comment>>(d.Protein, d.Comments));
+                .Results.Select(d => (d.Protein, d.Comments));
                 
             return searchedItems;
         }
 
-        public IEnumerable<KeyValuePair<Protein, IEnumerable<Comment>>> GetTree(Expression<Func<Gene, bool>> filter)
+        public IEnumerable<(Protein Protein, IEnumerable<Comment> Comments)> GetTree(Expression<Func<Gene, bool>> filter)
         {
             var client = _neo4jService.Client;
 
             var searchedItems = client.Cypher.MatchRelationship(new ProteinCommentRelationship())
                 .MatchRelationship(new GeneProteinRelationship())
                 .Where(filter)
-                .Return((protein, comment) => new 
-                { 
+                .Return((protein, comment) => new
+                {
                     Protein = protein.As<Protein>(), 
-                    Comments = comment.CollectAs<Comment>() 
+                    Comments = protein.CollectAsDistinct<Comment>()
                 })
-                .Results.Select(d => new KeyValuePair<Protein, IEnumerable<Comment>>(d.Protein, d.Comments));
+                .Results.Select(d => (d.Protein, d.Comments));
                 
             return searchedItems;
         }
