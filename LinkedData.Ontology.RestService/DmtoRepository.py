@@ -27,7 +27,7 @@ class DmtoRepository():
     def add_breakfast_meal(self):
         return self._add_individual(class_name='Onto:meal', prefix='#BREAKFAST_MEAL', is_abbreviated=True)
 
-    def add_relation(self, named_individual_owner, named_individual_referenced, property_name, is_abbreviated=False):
+    def add_relation(self, property_owner, reference_to, property_name, is_abbreviated=False):
         object_property_assertion = ET.Element('ObjectPropertyAssertion')
 
         if is_abbreviated:
@@ -35,14 +35,14 @@ class DmtoRepository():
         else:
             object_property_assertion.append(ET.Element('ObjectProperty', IRI=F'{property_name}'))
 
-        object_property_assertion.append(ET.Element('NamedIndividual', IRI=named_individual_owner))
-        object_property_assertion.append(ET.Element('NamedIndividual', IRI=named_individual_referenced))
+        object_property_assertion.append(ET.Element('NamedIndividual', IRI=property_owner))
+        object_property_assertion.append(ET.Element('NamedIndividual', IRI=reference_to))
 
         self._ontology_xml.append(object_property_assertion)
 
         return object_property_assertion
 
-    def add_data_property(self, named_individual_owner, property_name, data_type, data_value, is_abbreviated=False):
+    def add_data_property(self, property_owner, property_name, data_type, data_value, is_abbreviated=False):
         object_property_assertion = ET.Element('DataPropertyAssertion')
 
         if is_abbreviated:
@@ -50,7 +50,7 @@ class DmtoRepository():
         else:
             object_property_assertion.append(ET.Element('DataProperty', IRI=F'{property_name}'))
 
-        object_property_assertion.append(ET.Element('NamedIndividual', IRI=named_individual_owner))
+        object_property_assertion.append(ET.Element('NamedIndividual', IRI=property_owner))
 
         literal = ET.Element('Literal', datatypeIRI=data_type)
         literal.text = data_value
