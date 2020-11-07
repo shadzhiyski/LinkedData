@@ -82,7 +82,7 @@ def import_patients():
 	patients_xml_content = request.data
 	patients_xml = objectify.fromstring(patients_xml_content)
 
-	dmto_ontology_repo = DmtoRepository('Repository/DMTO_full_fixed.owl')
+	dmto_ontology_repo = DmtoRepository('Repository/DMTO_converted.owl')
 
 	patients = import_patients_data(dmto_ontology_repo, patients_xml)
 
