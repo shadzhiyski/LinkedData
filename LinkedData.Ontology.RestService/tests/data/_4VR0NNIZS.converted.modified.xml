@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Practice xmlns="http://localhost">
+	<PracticeCode>H61E6Qll/medbolFvPVP/wOnIEaxTJdjyTlMDDoz9a4=</PracticeCode>
+	<PracticeName>???</PracticeName>
+	<DateFrom>2016-01-01</DateFrom>
+	<DateTo>2016-01-31</DateTo>
+	<ContrHA>0</ContrHA>
+	<Doctor>
+		<UIN>ba8psj+w3jvzSogrXZkoBI4gYDdwq0i0SekOT8Mtj98=</UIN>
+		<EGN>Pz8/</EGN>
+		<FullName>???</FullName>
+		<SIMPCode>01</SIMPCode>
+		<AmbList>
+			<NoAl>000001</NoAl>
+			<dataAl>2016-01-06</dataAl>
+			<time>08:30:00</time>
+			<Pay>1</Pay>
+			<Patient>
+				<EGN>md0gwHzvV3iGdEpm4VNmTPppxRMLsxrGKfaliQg2wfo=</EGN>
+				<age>41.07</age>
+				<gender>2</gender>
+				<RZOK>03</RZOK>
+				<ZdrRajon>05</ZdrRajon>
+				<Name>
+					<Given>???</Given>
+					<Sur>???</Sur>
+					<Family>???</Family>
+				</Name>
+				<Address>Варна</Address>
+			</Patient>
+			<Disadv>0</Disadv>
+			<Incidentally>0</Incidentally>
+			<MainDiag>
+				<imeMD>Възпалителна болест на женските тазови органи, неуточнена</imeMD>
+				<MKB>N73.9</MKB>
+			</MainDiag>
+			<Procedure>
+				<imeP>Медицински преглед в амбулаторни или домашни условия, със снемане на анамнеза, общ и локален статус, оценка на здравословното състояние и оценка на медицински проблем</imeP>
+				<kodP>89.03</kodP>
+				<CountP>1</CountP>
+			</Procedure>
+			<Anamnesa>
+				<Blood>
+					<TotalCholesterol units="mmol/l" min-threshold="0" max-threshold="5.2">4.39</TotalCholesterol>
+					<Glucose units="mmol/l" min-threshold="3.3" max-threshold="6.2">10.13</Glucose>
+					<UricAcid units="umol/l" min-threshold="208" max-threshold="428">379</UricAcid>
+				</Blood>
+			</Anamnesa>
+			<HState>ВПО на раждала.Шийка с овула наботи.Матка и аднекси-б.о</HState>
+			<Examine>УЗИ:Матка с наличие на полип 0,96.Л.Я-б.о.Д.Я-дом.фоликул 21 мм.Цитонеамазка и вл.секрет• 02.14 Материал от генитална система N. gonorrhoeae, Streptococcus (Haemophilus), Staphylococcus, Gardnerella, Enterobacteriaceae и др. Грам ( - ), Гъби (C.albicans) и др. ; 02.19 Антибиограма с 6 антибиотични диска; ; </Examine>
+			<Therapy>
+				<Nonreimburce>Доуточняване</Nonreimburce>
+			</Therapy>
+			<SIMPList>
+				<PrimaryVisit>
+					<VidNapr>1</VidNapr>
+					<NoNapr>000012</NoNapr>
+					<NaprFor>1</NaprFor>
+					<dateNapr>2016-01-05</dateNapr>
+					<SendedFrom>
+						<PracticeCode>w/uX1gHYQjYTh1HSw1YoudTi61KT/phed3dWmOQFv9s=</PracticeCode>
+						<UIN>yFY9Nn4Gfi1fn0vQ35ZVNBuv3AUyP/8kt8zJAfUx15Y=</UIN>
+						<SIMPCode>00</SIMPCode>
+					</SendedFrom>
+				</PrimaryVisit>
+			</SIMPList>
+			<VisitFor>
+				<Consult>1</Consult>
+				<Disp>0</Disp>
+				<RpHosp>0</RpHosp>
+				<LKKVisit>0</LKKVisit>
+				<Telk>0</Telk>
+			</VisitFor>
+			<ExamType>11</ExamType>
+			<Docs>
+				<MDD>
+					<NoMDD>000001</NoMDD>
+					<MDDFor>1</MDDFor>
+					<kodMDD>02.14</kodMDD>
+					<kodMDD>02.19</kodMDD>
+					<MDDMKB>N73.9 </MDDMKB>
+				</MDD>
+				<TalonTELK>0</TalonTELK>
+				<Izvestie>0</Izvestie>
+				<EtEpikriza>0</EtEpikriza>
+			</Docs>
+			<Sign>1</Sign>
+		</AmbList>
+		<AmbList>
+			<NoAl>000001</NoAl>
+			<dataAl>2016-01-06</dataAl>
+			<time>08:30:00</time>
+			<Pay>1</Pay>
+			<Patient>
+				<EGN>md0gwHzvV3iGdEpm4VNmTPppxRMLsxrGKfaliQg2wfo=</EGN>
+				<age>41.07</age>
+				<gender>2</gender>
+				<RZOK>03</RZOK>
+				<ZdrRajon>05</ZdrRajon>
+				<Name>
+					<Given>???</Given>
+					<Sur>???</Sur>
+					<Family>???</Family>
+				</Name>
+				<Address>Варна</Address>
+			</Patient>
+			<Disadv>0</Disadv>
+			<Incidentally>0</Incidentally>
+			<MainDiag>
+				<imeMD>Възпалителна болест на женските тазови органи, неуточнена</imeMD>
+				<MKB>N73.9</MKB>
+			</MainDiag>
+			<Procedure>
+				<imeP>Медицински преглед в амбулаторни или домашни условия, със снемане на анамнеза, общ и локален статус, оценка на здравословното състояние и оценка на медицински проблем</imeP>
+				<kodP>89.03</kodP>
+				<CountP>1</CountP>
+			</Procedure>
+			<Anamnesa>
+				<Blood>
+					<TotalCholesterol units="mmol/l" min-threshold="0" max-threshold="5.2">5.0</TotalCholesterol>
+					<Glucose units="mmol/l" min-threshold="3.3" max-threshold="6.2">4.0</Glucose>
+					<UricAcid units="umol/l" min-threshold="208" max-threshold="428">379</UricAcid>
+				</Blood>
+			</Anamnesa>
+			<HState>ВПО на раждала.Шийка с овула наботи.Матка и аднекси-б.о</HState>
+			<Examine>УЗИ:Матка с наличие на полип 0,96.Л.Я-б.о.Д.Я-дом.фоликул 21 мм.Цитонеамазка и вл.секрет• 02.14 Материал от генитална система N. gonorrhoeae, Streptococcus (Haemophilus), Staphylococcus, Gardnerella, Enterobacteriaceae и др. Грам ( - ), Гъби (C.albicans) и др. ; 02.19 Антибиограма с 6 антибиотични диска; ; </Examine>
+			<Therapy>
+				<Nonreimburce>Доуточняване</Nonreimburce>
+			</Therapy>
+			<SIMPList>
+				<PrimaryVisit>
+					<VidNapr>1</VidNapr>
+					<NoNapr>000012</NoNapr>
+					<NaprFor>1</NaprFor>
+					<dateNapr>2016-01-05</dateNapr>
+					<SendedFrom>
+						<PracticeCode>w/uX1gHYQjYTh1HSw1YoudTi61KT/phed3dWmOQFv9s=</PracticeCode>
+						<UIN>yFY9Nn4Gfi1fn0vQ35ZVNBuv3AUyP/8kt8zJAfUx15Y=</UIN>
+						<SIMPCode>00</SIMPCode>
+					</SendedFrom>
+				</PrimaryVisit>
+			</SIMPList>
+			<VisitFor>
+				<Consult>1</Consult>
+				<Disp>0</Disp>
+				<RpHosp>0</RpHosp>
+				<LKKVisit>0</LKKVisit>
+				<Telk>0</Telk>
+			</VisitFor>
+			<ExamType>11</ExamType>
+			<Docs>
+				<MDD>
+					<NoMDD>000001</NoMDD>
+					<MDDFor>1</MDDFor>
+					<kodMDD>02.14</kodMDD>
+					<kodMDD>02.19</kodMDD>
+					<MDDMKB>N73.9 </MDDMKB>
+				</MDD>
+				<TalonTELK>0</TalonTELK>
+				<Izvestie>0</Izvestie>
+				<EtEpikriza>0</EtEpikriza>
+			</Docs>
+			<Sign>1</Sign>
+		</AmbList>
+	</Doctor>
+</Practice>
