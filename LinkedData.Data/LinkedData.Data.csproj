@@ -10,6 +10,6 @@
     <PackageReference Include="Neo4jClient.Extension" Version="1.0.2" />
     <PackageReference Include="Neo4jClient.Extension.Attributes" Version="1.0.2" />
     <PackageReference Include="Neo4jRepository" Version="2.2.16" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 </Project>
